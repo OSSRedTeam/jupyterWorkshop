@@ -153,6 +153,7 @@ RUN apt-get update --yes && \
     nano \
     traceroute \
     iputils-ping \
+    netcat \
     # git-over-ssh
     openssh-client \
     # less is needed to run help in R
