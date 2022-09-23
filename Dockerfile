@@ -167,6 +167,11 @@ RUN apt-get update --yes && \
     net-tools && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# install seclists and fuzz 
+RUN git clone https://github.com/danielmiessler/SecLists.git /usr/share/seclists
+
+RUN wget -c https://github.com/ffuf/ffuf/releases/download/v1.5.0/ffuf_1.5.0_linux_amd64.tar.gz -O - | tar -xz -C /tmp && mv /tmp/ffuf /usr/bin
+
 USER ${NB_UID}
 
 # Install Python 3 packages
