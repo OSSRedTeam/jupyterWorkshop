@@ -164,11 +164,22 @@ RUN apt-get update --yes && \
     texlive-xetex \
     texlive-fonts-recommended \
     texlive-plain-generic \
-    net-tools && \
+    net-tools \
+    curl \
+		nmap \
+		build-essential \
+		binutils
+
+RUN apt-get install --yes --no-install-recommends \
+	  python2-minimal \
+		python-setuptools && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
+RUN curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py && \
+	  sudo python2 get-pip.py
+
 # install seclists and fuzz 
-RUN git clone https://github.com/danielmiessler/SecLists.git /usr/share/seclists
+#RUN git clone https://github.com/danielmiessler/SecLists.git /usr/share/seclists
 
 RUN wget -c https://github.com/ffuf/ffuf/releases/download/v1.5.0/ffuf_1.5.0_linux_amd64.tar.gz -O - | tar -xz -C /tmp && mv /tmp/ffuf /usr/bin
 
